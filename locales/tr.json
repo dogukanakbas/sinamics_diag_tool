@@ -1,0 +1,73 @@
+{
+  "app": {
+    "title": "SINAMICS Diag & Viz (Gelişmiş)",
+    "version": "2.0"
+  },
+  "menu": {
+    "file": "Dosya",
+    "load_model": "Model Yükle...",
+    "export_data": "Veri Dışa Aktar...",
+    "import_data": "Veri İçe Aktar...",
+    "exit": "Çıkış",
+    "view": "Görünüm",
+    "model_info": "Model Bilgileri",
+    "connection_status": "Bağlantı Durumu",
+    "history": "Geçmiş",
+    "statistics": "İstatistikler",
+    "help": "Yardım",
+    "shortcuts": "Klavye Kısayolları",
+    "about": "Hakkında"
+  },
+  "status": {
+    "faults": "Arızalar",
+    "alarms": "Alarmlar",
+    "normal": "Normal",
+    "connected": "Bağlı",
+    "disconnected": "Bağlantısız",
+    "simulator": "Simülatör Modu"
+  },
+  "components": {
+    "rectifier": "Doğrultucu",
+    "dc_link": "DC Bağlantı",
+    "inverter": "İnvertör",
+    "motor": "Motor",
+    "fan": "Fan",
+    "cu320": "CU320-2 PN",
+    "controller": "Kontrol Ünitesi"
+  },
+  "messages": {
+    "model_loaded": "Model yüklendi: {model}",
+    "data_exported": "Veri dışa aktarıldı: {file}",
+    "data_imported": "Veri içe aktarıldı: {file}",
+    "connection_established": "Bağlantı kuruldu",
+    "connection_lost": "Bağlantı kesildi",
+    "fault_detected": "Arıza tespit edildi: {fault}",
+    "alarm_detected": "Alarm tespit edildi: {alarm}",
+    "all_cleared": "Tüm arıza/alarmlar temizlendi"
+  },
+  "shortcuts": {
+    "title": "Klavye Kısayolları",
+    "inject_alarm": "A - Alarm Üret (Sadece Simülatör)",
+    "inject_fault": "F - Arıza Üret (Sadece Simülatör)",
+    "clear_all": "C - Tümünü Temizle (Sadece Simülatör)",
+    "refresh_data": "F5 - Veriyi Yenile",
+    "refresh_data_ctrl": "Ctrl+R - Veriyi Yenile"
+  },
+  "about": {
+    "title": "Hakkında",
+    "description": "Sürücü sistemleri için tanılama ve görselleştirme aracı.",
+    "features": [
+      "JSON tabanlı model sistemi",
+      "Çoklu veri kaynağı adaptörleri",
+      "Gerçek zamanlı arıza/alarm görselleştirmesi",
+      "Genişletilebilir mimari"
+    ]
+  },
+  "errors": {
+    "file_not_found": "Dosya bulunamadı: {file}",
+    "invalid_format": "Geçersiz format: {format}",
+    "connection_failed": "Bağlantı başarısız: {error}",
+    "export_failed": "Dışa aktarma başarısız: {error}",
+    "import_failed": "İçe aktarma başarısız: {error}"
+  }
+}

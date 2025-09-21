@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password_hash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+      "role": "admin",
+      "full_name": "System Administrator",
+      "email": "admin@company.com",
+      "is_active": true,
+      "created_at": "2025-09-21T18:43:49.849851",
+      "last_login": "2025-09-21T19:51:19.156074",
+      "login_attempts": 0,
+      "locked_until": null
+    }
+  ],
+  "last_updated": "2025-09-21T19:51:19.156436"
+}

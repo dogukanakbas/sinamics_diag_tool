@@ -1,0 +1,172 @@
+2025-09-21 17:58:43 - sinamics_diag.errors - ERROR - Security initialization failed: 'I18nManager' object has no attribute 'get'
+2025-09-21 17:58:56 - sinamics_diag.errors - ERROR - Security initialization failed: 'ThemeManager' object has no attribute 'get_current_theme'
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Get system summary failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 17:59:44 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:02:43 - sinamics_diag.errors - ERROR - Security initialization failed: 'ThemeManager' object has no attribute 'get_current_theme'
+2025-09-21 18:02:50 - sinamics_diag.errors - ERROR - Security initialization failed: 'ThemeManager' object has no attribute 'get_current_theme'
+2025-09-21 18:03:32 - sinamics_diag.errors - ERROR - Security initialization failed: 'ThemeManager' object has no attribute 'get_colors'
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Get system summary failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:03:37 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:04:17 - sinamics_diag.errors - ERROR - Security initialization failed: 'ThemeManager' object has no attribute 'get_colors'
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Get system summary failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - PDF report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Excel report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:06:15 - sinamics_diag.errors - ERROR - Report generation failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sinamics_diag" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-21 18:14:30 - sinamics_diag.errors - ERROR - Failed to add communication menu: '!menu'
+2025-09-21 18:14:32 - sinamics_diag.errors - ERROR - Failed to add communication menu: '!menu'
+2025-09-21 18:14:33 - sinamics_diag.errors - ERROR - Failed to add communication menu: '!menu'
+2025-09-21 18:14:59 - sinamics_diag.errors - ERROR - Failed to add communication menu: invalid command name "."
+2025-09-21 18:15:01 - sinamics_diag.errors - ERROR - Failed to add communication menu: '!menu'
+2025-09-21 18:16:28 - sinamics_diag.errors - ERROR - Failed to add communication menu: invalid command name "."
+2025-09-21 18:16:54 - sinamics_diag.errors - ERROR - Failed to add communication menu: invalid command name "."
+2025-09-21 18:20:55 - sinamics_diag.errors - ERROR - Failed to add communication menu: cannot invoke "winfo" command: application has been destroyed
+2025-09-21 18:21:05 - sinamics_diag.errors - ERROR - Failed to add communication menu: cannot invoke "winfo" command: application has been destroyed
+2025-09-21 18:22:59 - sinamics_diag.errors - ERROR - Failed to save alarm to database: name 'Component' is not defined
+2025-09-21 18:25:46 - sinamics_diag.errors - ERROR - API status error: Object of type ProtocolType is not JSON serializable
+2025-09-21 18:26:11 - sinamics_diag.errors - ERROR - API status error: Object of type ProtocolType is not JSON serializable
+2025-09-21 18:26:34 - sinamics_diag.errors - ERROR - API status error: Object of type ProtocolType is not JSON serializable

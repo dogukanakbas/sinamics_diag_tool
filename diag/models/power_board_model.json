@@ -1,0 +1,37 @@
+{
+  "title": "Power Board Diagnostics",
+  "description": "Generic power board with AC input, bridge, PFC, LLC and DC output",
+  "components": [
+    {"id": "ac_in", "name": "AC Input", "x": 40, "y": 220, "w": 140, "h": 90, "type": "input"},
+    {"id": "bridge", "name": "Bridge", "x": 210, "y": 220, "w": 140, "h": 90, "type": "converter"},
+    {"id": "pfc", "name": "PFC", "x": 380, "y": 220, "w": 140, "h": 90, "type": "converter"},
+    {"id": "llc", "name": "LLC", "x": 550, "y": 220, "w": 140, "h": 90, "type": "converter"},
+    {"id": "out", "name": "DC Output", "x": 720, "y": 220, "w": 140, "h": 90, "type": "output"}
+  ],
+  "connections": [
+    {"from": "ac_in", "to": "bridge", "type": "power"},
+    {"from": "bridge", "to": "pfc", "type": "power"},
+    {"from": "pfc", "to": "llc", "type": "power"},
+    {"from": "llc", "to": "out", "type": "power"}
+  ],
+  "fault_map": {
+    "F_OVERCUR": "llc",
+    "F_OVERVOLT": "out", 
+    "F_BRIDGE": "bridge",
+    "F_PFC": "pfc",
+    "F_AC_IN": "ac_in"
+  },
+  "alarm_map": {
+    "A_FAN_WARN": "llc",
+    "A_TEMP_HIGH": "pfc",
+    "A_VOLT_LOW": "ac_in"
+  },
+  "colors": {
+    "normal": {"fill": "#1d1f23", "outline": "#5a5f6a"},
+    "fault": {"fill": "#7f1d1d", "outline": "#ef4444"},
+    "alarm": {"fill": "#1f2937", "outline": "#94a3b8"},
+    "background": "#0f0f11",
+    "text": "#e5e7eb",
+    "text_secondary": "#cbd5e1"
+  }
+}

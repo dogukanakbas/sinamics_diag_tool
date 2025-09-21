@@ -1,0 +1,73 @@
+{
+  "app": {
+    "title": "SINAMICS Diag & Viz (Enhanced)",
+    "version": "2.0"
+  },
+  "menu": {
+    "file": "File",
+    "load_model": "Load Model...",
+    "export_data": "Export Data...",
+    "import_data": "Import Data...",
+    "exit": "Exit",
+    "view": "View",
+    "model_info": "Model Information",
+    "connection_status": "Connection Status",
+    "history": "History",
+    "statistics": "Statistics",
+    "help": "Help",
+    "shortcuts": "Keyboard Shortcuts",
+    "about": "About"
+  },
+  "status": {
+    "faults": "Faults",
+    "alarms": "Alarms",
+    "normal": "Normal",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "simulator": "Simulator Mode"
+  },
+  "components": {
+    "rectifier": "Rectifier",
+    "dc_link": "DC Link",
+    "inverter": "Inverter",
+    "motor": "Motor",
+    "fan": "Fan",
+    "cu320": "CU320-2 PN",
+    "controller": "Controller"
+  },
+  "messages": {
+    "model_loaded": "Model loaded: {model}",
+    "data_exported": "Data exported: {file}",
+    "data_imported": "Data imported: {file}",
+    "connection_established": "Connection established",
+    "connection_lost": "Connection lost",
+    "fault_detected": "Fault detected: {fault}",
+    "alarm_detected": "Alarm detected: {alarm}",
+    "all_cleared": "All faults/alarms cleared"
+  },
+  "shortcuts": {
+    "title": "Keyboard Shortcuts",
+    "inject_alarm": "A - Inject Alarm (Simulator only)",
+    "inject_fault": "F - Inject Fault (Simulator only)",
+    "clear_all": "C - Clear All (Simulator only)",
+    "refresh_data": "F5 - Refresh Data",
+    "refresh_data_ctrl": "Ctrl+R - Refresh Data"
+  },
+  "about": {
+    "title": "About",
+    "description": "Diagnostic and visualization tool for drive systems.",
+    "features": [
+      "JSON-based model system",
+      "Multiple data source adapters",
+      "Real-time fault/alarm visualization",
+      "Extensible architecture"
+    ]
+  },
+  "errors": {
+    "file_not_found": "File not found: {file}",
+    "invalid_format": "Invalid format: {format}",
+    "connection_failed": "Connection failed: {error}",
+    "export_failed": "Export failed: {error}",
+    "import_failed": "Import failed: {error}"
+  }
+}

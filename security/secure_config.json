@@ -1,0 +1,43 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "sinamics_diag",
+    "username": "admin",
+    "password": "encrypted_password_here"
+  },
+  "communication": {
+    "profinet": {
+      "enabled": false,
+      "plc_ip": "192.168.1.100",
+      "rack": 0,
+      "slot": 1,
+      "username": "",
+      "password": ""
+    },
+    "modbus": {
+      "enabled": false,
+      "host": "192.168.1.101",
+      "port": 502,
+      "unit_id": 1
+    },
+    "ethernet_ip": {
+      "enabled": false,
+      "host": "192.168.1.102",
+      "port": 44818
+    }
+  },
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "username": "",
+    "password": ""
+  },
+  "security": {
+    "session_timeout_hours": 8,
+    "max_login_attempts": 5,
+    "lockout_duration_minutes": 30,
+    "password_min_length": 8,
+    "require_strong_password": true
+  }
+}

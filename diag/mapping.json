@@ -1,0 +1,8 @@
+{
+  "fault_map": {
+    "F30012": "Inverter",
+    "F30005": "Rectifier",
+    "F30011": "Motor",
+    "F30020": "DC_Link"
+  }
+}

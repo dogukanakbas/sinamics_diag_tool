@@ -1,0 +1,66 @@
+{
+  "name": "Dark Theme",
+  "description": "Koyu tema - göz yormayan karanlık renkler",
+  "colors": {
+    "background": "#0f0f11",
+    "surface": "#1d1f23",
+    "surface_variant": "#2a2d35",
+    "primary": "#3b82f6",
+    "primary_variant": "#1d4ed8",
+    "secondary": "#10b981",
+    "secondary_variant": "#059669",
+    "error": "#ef4444",
+    "error_variant": "#dc2626",
+    "warning": "#f59e0b",
+    "warning_variant": "#d97706",
+    "success": "#10b981",
+    "success_variant": "#059669",
+    "text": "#e5e7eb",
+    "text_secondary": "#cbd5e1",
+    "text_disabled": "#9ca3af",
+    "border": "#5a5f6a",
+    "border_variant": "#374151",
+    "shadow": "#000000",
+    "overlay": "rgba(0, 0, 0, 0.5)"
+  },
+  "components": {
+    "normal": {
+      "fill": "#1d1f23",
+      "outline": "#5a5f6a",
+      "text": "#e5e7eb"
+    },
+    "fault": {
+      "fill": "#7f1d1d",
+      "outline": "#ef4444",
+      "text": "#ffffff"
+    },
+    "alarm": {
+      "fill": "#1f2937",
+      "outline": "#94a3b8",
+      "text": "#e5e7eb"
+    },
+    "warning": {
+      "fill": "#451a03",
+      "outline": "#f59e0b",
+      "text": "#ffffff"
+    },
+    "success": {
+      "fill": "#064e3b",
+      "outline": "#10b981",
+      "text": "#ffffff"
+    }
+  },
+  "ui": {
+    "menu_background": "#1d1f23",
+    "menu_text": "#e5e7eb",
+    "menu_hover": "#2a2d35",
+    "button_background": "#374151",
+    "button_text": "#e5e7eb",
+    "button_hover": "#4b5563",
+    "input_background": "#1d1f23",
+    "input_text": "#e5e7eb",
+    "input_border": "#5a5f6a",
+    "status_bar_background": "#111827",
+    "status_bar_text": "#9ca3af"
+  }
+}

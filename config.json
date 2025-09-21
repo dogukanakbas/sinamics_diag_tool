@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "SINAMICS Diag & Viz (Enhanced)",
+    "version": "2.0",
+    "window_size": {
+      "width": 1465,
+      "height": 821
+    },
+    "poll_interval": 500,
+    "auto_save": true
+  },
+  "ui": {
+    "theme": "light",
+    "language": "tr",
+    "show_help": true,
+    "show_status_bar": true,
+    "font_size": 12
+  },
+  "logging": {
+    "enabled": true,
+    "log_level": "INFO",
+    "log_directory": "logs",
+    "max_log_files": 30,
+    "console_output": false
+  },
+  "models": {
+    "default_model": "diag/models/sinamics_model.json",
+    "recent_models": []
+  },
+  "adapters": {
+    "default_adapter": "simulator",
+    "opcua": {
+      "endpoint": "opc.tcp://192.168.0.10:4840",
+      "timeout": 5,
+      "retry_count": 3
+    },
+    "command": {
+      "timeout": 3,
+      "poll_interval": 0.5
+    }
+  },
+  "history": {
+    "enabled": true,
+    "max_entries": 1000,
+    "save_interval": 60
+  },
+  "export": {
+    "default_format": "json",
+    "include_timestamps": true,
+    "include_metadata": true
+  }
+}
