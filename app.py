@@ -426,8 +426,8 @@ H - Start Healthy System Scenario (All Green)"""
             if hasattr(self.data_source, 'start_scenario'):
                 if self.data_source.start_scenario("healthy_system"):
                     logger.log_user_action("start_scenario", "Healthy system scenario started")
-                    # 12 saniye sonra mesaj göster
-                    self.after(12000, self._show_healthy_message)
+                    # 25 saniye sonra mesaj göster
+                    self.after(25000, self._show_healthy_message)
                 else:
                     from tkinter import messagebox
                     messagebox.showerror("Error", "Failed to start healthy system scenario")
