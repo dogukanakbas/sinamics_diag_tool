@@ -662,6 +662,11 @@ class RealisticSimulator:
                     "timestamp": datetime.now().isoformat()
                 })
                 
+        # Healthy scenario kontrolü
+        healthy_scenario = False
+        if self._current_scenario and self._current_scenario.get("name") == "Healthy System (All Green)":
+            healthy_scenario = True
+            
         return {
             "faults": faults,
             "alarms": alarms,
@@ -678,6 +683,7 @@ class RealisticSimulator:
                 "voltage": self.system_voltage
             },
             "scenario": self.get_current_scenario(),
+            "healthy_scenario": healthy_scenario,
             "timestamp": datetime.now().isoformat()
         }
         

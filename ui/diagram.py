@@ -60,6 +60,7 @@ class DriveDiagram(tk.Frame):
             "fault_map": old_map.get("fault_map", {}),
             "colors": {
                 "normal": {"fill": "#1d1f23", "outline": "#5a5f6a"},
+                "healthy": {"fill": "#166534", "outline": "#22c55e"},
                 "fault": {"fill": "#7f1d1d", "outline": "#ef4444"},
                 "alarm": {"fill": "#1f2937", "outline": "#94a3b8"},
                 "background": "#0f0f11",
@@ -86,6 +87,7 @@ class DriveDiagram(tk.Frame):
             "fault_map": {},
             "colors": {
                 "normal": {"fill": "#1d1f23", "outline": "#5a5f6a"},
+                "healthy": {"fill": "#166534", "outline": "#22c55e"},
                 "fault": {"fill": "#7f1d1d", "outline": "#ef4444"},
                 "alarm": {"fill": "#1f2937", "outline": "#94a3b8"},
                 "background": "#0f0f11",
@@ -145,6 +147,7 @@ class DriveDiagram(tk.Frame):
         """Bileşenleri çiz"""
         faulted_components = set(self._affected_components())
         alarmed_components = set(self._alarmed_components())
+        healthy_components = set(self._healthy_components())
         
         for component in self.model.get("components", []):
             comp_id = component["id"]
@@ -160,6 +163,10 @@ class DriveDiagram(tk.Frame):
             elif comp_id in alarmed_components:
                 fill = colors["alarm"]["fill"]
                 outline = colors["alarm"]["outline"]
+                width = 3
+            elif comp_id in healthy_components:
+                fill = colors["healthy"]["fill"]
+                outline = colors["healthy"]["outline"]
                 width = 3
             else:
                 fill = colors["normal"]["fill"]
@@ -271,6 +278,13 @@ class DriveDiagram(tk.Frame):
                 affected.append(comp)
                 
         return affected
+        
+    def _healthy_components(self):
+        """Sağlıklı bileşenleri döndür (healthy scenario aktifken)"""
+        # Eğer healthy scenario aktifse tüm bileşenleri sağlıklı göster
+        if hasattr(self, 'current') and self.current.get("healthy_scenario", False):
+            return [comp["id"] for comp in self.model.get("components", [])]
+        return []
         
     def load_model(self, model_path: str):
         """Yeni model yükle"""
