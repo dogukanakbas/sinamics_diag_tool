@@ -313,6 +313,7 @@ class App(tk.Tk):
                 self.bind("<KeyPress-s>", lambda e: self._start_random_scenario())
                 self.bind("<KeyPress-x>", lambda e: self._stop_scenario())
                 self.bind("<KeyPress-p>", lambda e: self._show_simulator_control())
+                self.bind("<KeyPress-h>", lambda e: self._start_healthy_scenario())
         else:
             # Diğer adaptörler için genel kısayollar
             self.bind("<F5>", lambda e: self._refresh_data())
@@ -375,7 +376,8 @@ Ctrl+R - Refresh Data"""
             shortcuts += """
 S - Start Random Scenario (Advanced/Enhanced/Realistic Simulator)
 X - Stop Scenario (Advanced/Enhanced/Realistic Simulator)
-P - Show Simulator Control Panel (Advanced/Enhanced/Realistic Simulator)"""
+P - Show Simulator Control Panel (Advanced/Enhanced/Realistic Simulator)
+H - Start Healthy System Scenario (All Green)"""
         
         from tkinter import messagebox
         messagebox.showinfo("Keyboard Shortcuts", shortcuts)
@@ -411,6 +413,24 @@ P - Show Simulator Control Panel (Advanced/Enhanced/Realistic Simulator)"""
             if hasattr(self.data_source, 'stop_scenario'):
                 self.data_source.stop_scenario()
                 logger.log_user_action("stop_scenario", "Scenario stopped")
+            else:
+                from tkinter import messagebox
+                messagebox.showinfo("Info", "This simulator doesn't support scenarios")
+        else:
+            from tkinter import messagebox
+            messagebox.showinfo("Info", "Scenarios are only available with Advanced/Enhanced/Realistic Simulator")
+            
+    def _start_healthy_scenario(self):
+        """Sağlıklı sistem senaryosunu başlat"""
+        if isinstance(self.data_source, (AdvancedSimulator, EnhancedSimulator, RealisticSimulator)):
+            if hasattr(self.data_source, 'start_scenario'):
+                if self.data_source.start_scenario("healthy_system"):
+                    logger.log_user_action("start_scenario", "Healthy system scenario started")
+                    from tkinter import messagebox
+                    messagebox.showinfo("Healthy System", "✅ Tüm sistem sağlıklı!\n\n• Tüm fault'lar temizlendi\n• Tüm alarm'lar temizlendi\n• Optimal koşullar ayarlandı\n• Sistem %100 sağlıklı")
+                else:
+                    from tkinter import messagebox
+                    messagebox.showerror("Error", "Failed to start healthy system scenario")
             else:
                 from tkinter import messagebox
                 messagebox.showinfo("Info", "This simulator doesn't support scenarios")

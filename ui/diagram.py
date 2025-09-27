@@ -223,7 +223,7 @@ class DriveDiagram(tk.Frame):
         )
         
         # Yardım metni
-        help_text = "A: Alarm  F: Fault  C: Clear"
+        help_text = "A: Alarm  F: Fault  C: Clear  H: Healthy"
         self.canvas.create_text(
             w - 12, h - 12, anchor="se",
             fill="#9ca3af", font=self.font_help,

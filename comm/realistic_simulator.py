@@ -522,7 +522,30 @@ class RealisticSimulator:
         event_type = event["type"]
         component_id = event.get("component")
         
-        if event_type == "load_increase" and component_id in self.components:
+        if event_type == "clear_all_faults":
+            # Tüm fault'ları temizle
+            for component in self.components.values():
+                component.faults.clear()
+                
+        elif event_type == "clear_all_alarms":
+            # Tüm alarm'ları temizle
+            for component in self.components.values():
+                component.alarms.clear()
+                
+        elif event_type == "optimal_conditions":
+            # Optimal koşulları ayarla
+            for component in self.components.values():
+                component.health_score = 100.0
+                component.temperature = 25.0 + random.uniform(-2, 2)
+                component.vibration = 0.5 + random.uniform(-0.1, 0.1)
+                component.load_percentage = 30.0 + random.uniform(-5, 5)
+                component.fatigue_level = 0.0
+                component.wear_level = 0.0
+                component.corrosion_level = 0.0
+                component.lubrication_level = 100.0
+                component.efficiency = 95.0 + random.uniform(-2, 2)
+                
+        elif event_type == "load_increase" and component_id in self.components:
             component = self.components[component_id]
             component.load_percentage = event["load_percentage"]
             
@@ -535,6 +558,16 @@ class RealisticSimulator:
     def start_scenario(self, scenario_name: str = None):
         """Senaryo başlat"""
         scenarios = {
+            "healthy_system": {
+                "name": "Healthy System (All Green)",
+                "description": "Tüm sistem sağlıklı, hiç hata yok",
+                "duration": 0,  # Süresiz
+                "events": [
+                    {"type": "clear_all_faults", "time": 0},
+                    {"type": "clear_all_alarms", "time": 0},
+                    {"type": "optimal_conditions", "time": 0},
+                ]
+            },
             "production_peak": {
                 "name": "Production Peak Load",
                 "description": "Maksimum üretim yükü senaryosu",
@@ -707,6 +740,7 @@ class RealisticSimulator:
     def get_available_scenarios(self):
         """Mevcut senaryoları al"""
         return {
+            "healthy_system": "Healthy System (All Green)",
             "production_peak": "Production Peak Load",
             "maintenance_overdue": "Maintenance Overdue", 
             "environmental_stress": "Environmental Stress"
