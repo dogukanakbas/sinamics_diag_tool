@@ -514,6 +514,7 @@ class RealisticSimulator:
         # Senaryo event'lerini işle
         for event in self._current_scenario.get("events", []):
             if elapsed >= event["time"] and not event.get("processed", False):
+                print(f"Processing event at {elapsed:.1f}s: {event['type']} for {event.get('component', 'all')}")
                 self._process_scenario_event(event)
                 event["processed"] = True
                 
@@ -642,6 +643,9 @@ class RealisticSimulator:
         
         if scenario_name in scenarios:
             self._current_scenario = scenarios[scenario_name].copy()
+            # Event'lerin processed bayrağını sıfırla
+            for event in self._current_scenario.get("events", []):
+                event["processed"] = False
             self._scenario_start_time = datetime.now()
             print(f"Started scenario: {self._current_scenario['name']}")
             return True
