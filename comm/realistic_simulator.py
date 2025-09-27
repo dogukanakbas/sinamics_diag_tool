@@ -545,6 +545,10 @@ class RealisticSimulator:
                 component.lubrication_level = 100.0
                 component.efficiency = 95.0 + random.uniform(-2, 2)
                 
+        elif event_type == "show_healthy_message":
+            # Sağlıklı sistem mesajını göster
+            print("✅ Sistem sağlıklı! Tüm bileşenler yeşil durumda.")
+                
         elif event_type == "load_increase" and component_id in self.components:
             component = self.components[component_id]
             component.load_percentage = event["load_percentage"]
@@ -561,11 +565,12 @@ class RealisticSimulator:
             "healthy_system": {
                 "name": "Healthy System (All Green)",
                 "description": "Tüm sistem sağlıklı, hiç hata yok",
-                "duration": 0,  # Süresiz
+                "duration": 6,  # 6 saniye
                 "events": [
                     {"type": "clear_all_faults", "time": 0},
                     {"type": "clear_all_alarms", "time": 0},
                     {"type": "optimal_conditions", "time": 0},
+                    {"type": "show_healthy_message", "time": 5},  # 5 saniye sonra mesaj
                 ]
             },
             "production_peak": {
