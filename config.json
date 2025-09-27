@@ -6,7 +6,7 @@
       "width": 1465,
       "height": 821
     },
-    "poll_interval": 500,
+    "poll_interval": 100,
     "auto_save": true
   },
   "ui": {

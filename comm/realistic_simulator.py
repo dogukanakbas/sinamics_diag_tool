@@ -414,7 +414,7 @@ class RealisticSimulator:
                 if self._current_scenario:
                     self._process_scenario()
                     
-                time.sleep(0.1)  # 100ms güncelleme
+                time.sleep(0.05)  # 50ms güncelleme
                 
             except Exception as e:
                 print(f"Simulation loop error: {e}")
@@ -577,6 +577,9 @@ class RealisticSimulator:
             component.faults.clear()
             component.alarms.clear()
             print(f"✅ {component_id} sağlıklı duruma geçti!")
+            # UI'yi hemen güncelle
+            import threading
+            threading.Thread(target=self._force_ui_update, daemon=True).start()
             
         elif event_type == "show_healthy_message":
             # Sağlıklı sistem mesajını göster
@@ -792,6 +795,10 @@ class RealisticSimulator:
             component.faults.clear()
             component.alarms.clear()
             
+    def _force_ui_update(self):
+        """UI'yi zorla güncelle"""
+        time.sleep(0.1)  # Kısa bir bekleme
+        
     def get_available_scenarios(self):
         """Mevcut senaryoları al"""
         return {
