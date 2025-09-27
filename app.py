@@ -426,8 +426,8 @@ H - Start Healthy System Scenario (All Green)"""
             if hasattr(self.data_source, 'start_scenario'):
                 if self.data_source.start_scenario("healthy_system"):
                     logger.log_user_action("start_scenario", "Healthy system scenario started")
-                    # 5 saniye sonra mesaj göster
-                    self.after(5000, self._show_healthy_message)
+                    # 12 saniye sonra mesaj göster
+                    self.after(12000, self._show_healthy_message)
                 else:
                     from tkinter import messagebox
                     messagebox.showerror("Error", "Failed to start healthy system scenario")
@@ -441,7 +441,7 @@ H - Start Healthy System Scenario (All Green)"""
     def _show_healthy_message(self):
         """Sağlıklı sistem mesajını göster"""
         from tkinter import messagebox
-        messagebox.showinfo("Sistem Sağlıklı", "✅ Sistem sağlıklı!\n\n• Tüm bileşenler yeşil durumda\n• Tüm fault'lar temizlendi\n• Tüm alarm'lar temizlendi\n• Optimal koşullar ayarlandı\n• Sistem %100 sağlıklı")
+        messagebox.showinfo("Sistem Sağlıklı", "✅ Sistem sağlıklı!\n\n• CU320-2 PN, Rectifier, DC Link, Inverter yeşil\n• Motor ve Fan kırmızı durumda\n• Tüm fault'lar temizlendi\n• Tüm alarm'lar temizlendi\n• Optimal koşullar ayarlandı")
 
     def _show_about(self):
         """Hakkında bilgisi göster"""

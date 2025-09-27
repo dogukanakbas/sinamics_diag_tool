@@ -545,6 +545,22 @@ class RealisticSimulator:
                 component.lubrication_level = 100.0
                 component.efficiency = 95.0 + random.uniform(-2, 2)
                 
+        elif event_type == "make_healthy" and component_id in self.components:
+            # Belirli bir bileşeni sağlıklı yap
+            component = self.components[component_id]
+            component.health_score = 100.0
+            component.temperature = 25.0 + random.uniform(-2, 2)
+            component.vibration = 0.5 + random.uniform(-0.1, 0.1)
+            component.load_percentage = 30.0 + random.uniform(-5, 5)
+            component.fatigue_level = 0.0
+            component.wear_level = 0.0
+            component.corrosion_level = 0.0
+            component.lubrication_level = 100.0
+            component.efficiency = 95.0 + random.uniform(-2, 2)
+            component.faults.clear()
+            component.alarms.clear()
+            print(f"✅ {component_id} sağlıklı duruma geçti!")
+            
         elif event_type == "show_healthy_message":
             # Sağlıklı sistem mesajını göster
             print("✅ Sistem sağlıklı! Tüm bileşenler yeşil durumda.")
@@ -565,12 +581,16 @@ class RealisticSimulator:
             "healthy_system": {
                 "name": "Healthy System (All Green)",
                 "description": "Tüm sistem sağlıklı, hiç hata yok",
-                "duration": 6,  # 6 saniye
+                "duration": 15,  # 15 saniye
                 "events": [
                     {"type": "clear_all_faults", "time": 0},
                     {"type": "clear_all_alarms", "time": 0},
                     {"type": "optimal_conditions", "time": 0},
-                    {"type": "show_healthy_message", "time": 5},  # 5 saniye sonra mesaj
+                    {"type": "make_healthy", "component": "cu320", "time": 2},  # 2 saniye sonra CU320
+                    {"type": "make_healthy", "component": "rectifier", "time": 4},  # 4 saniye sonra Rectifier
+                    {"type": "make_healthy", "component": "dc_link", "time": 6},  # 6 saniye sonra DC Link
+                    {"type": "make_healthy", "component": "inverter", "time": 8},  # 8 saniye sonra Inverter
+                    {"type": "show_healthy_message", "time": 12},  # 12 saniye sonra mesaj
                 ]
             },
             "production_peak": {
@@ -662,10 +682,13 @@ class RealisticSimulator:
                     "timestamp": datetime.now().isoformat()
                 })
                 
-        # Healthy scenario kontrolü
+        # Healthy scenario kontrolü ve sağlıklı bileşenleri belirle
         healthy_scenario = False
+        healthy_components = []
         if self._current_scenario and self._current_scenario.get("name") == "Healthy System (All Green)":
             healthy_scenario = True
+            # Sadece belirli bileşenler sağlıklı (motor ve fan hariç)
+            healthy_components = ["cu320", "rectifier", "dc_link", "inverter"]
             
         return {
             "faults": faults,
@@ -684,6 +707,7 @@ class RealisticSimulator:
             },
             "scenario": self.get_current_scenario(),
             "healthy_scenario": healthy_scenario,
+            "healthy_components": healthy_components,
             "timestamp": datetime.now().isoformat()
         }
         

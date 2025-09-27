@@ -281,9 +281,9 @@ class DriveDiagram(tk.Frame):
         
     def _healthy_components(self):
         """Sağlıklı bileşenleri döndür (healthy scenario aktifken)"""
-        # Eğer healthy scenario aktifse tüm bileşenleri sağlıklı göster
+        # Eğer healthy scenario aktifse sadece belirli bileşenleri sağlıklı göster
         if hasattr(self, 'current') and self.current.get("healthy_scenario", False):
-            return [comp["id"] for comp in self.model.get("components", [])]
+            return self.current.get("healthy_components", [])
         return []
         
     def load_model(self, model_path: str):
