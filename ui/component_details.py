@@ -11,11 +11,12 @@ class ComponentDetailsWindow:
     """Bileşen detay penceresi"""
     
     def __init__(self, parent, component_data: Dict[str, Any], history_data: List[Dict[str, Any]] = None, 
-                 enhanced_data: Optional[Dict[str, Any]] = None):
+                 enhanced_data: Optional[Dict[str, Any]] = None, full_details: Optional[Dict[str, Any]] = None):
         self.parent = parent
         self.component_data = component_data
         self.history_data = history_data or []
         self.enhanced_data = enhanced_data
+        self.full_details = full_details or {}
         
         self.window = tk.Toplevel(parent)
         self.window.title(f"Component Details - {component_data.get('name', 'Unknown')}")
@@ -54,6 +55,18 @@ class ComponentDetailsWindow:
         # Enhanced data tab (eğer varsa)
         if self.enhanced_data:
             self._create_enhanced_tab()
+
+        # Subcomponents tab (varsa)
+        if self.full_details.get('subcomponents'):
+            self._create_subcomponents_tab(self.full_details.get('subcomponents', []))
+
+        # Checklist tab (varsa)
+        if self.full_details.get('checklist'):
+            self._create_checklist_tab(self.full_details.get('checklist', []))
+
+        # Root-cause tab (varsa)
+        if self.full_details.get('root_cause'):
+            self._create_root_cause_tab(self.full_details.get('root_cause', []))
         
         # Butonlar
         button_frame = ttk.Frame(main_frame)
@@ -128,6 +141,45 @@ class ComponentDetailsWindow:
         # Pack canvas and scrollbar
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
+
+    def _create_subcomponents_tab(self, subcomponents: List[Dict[str, Any]]):
+        """Alt-komponentler tab'ı"""
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Subcomponents")
+        tree = ttk.Treeview(tab, columns=("Name", "Metric", "Value"), show="headings")
+        for col in ("Name", "Metric", "Value"):
+            tree.heading(col, text=col)
+            tree.column(col, width=160, anchor="w")
+        for sc in subcomponents:
+            name = sc.get('name', 'Unknown')
+            metrics = sc.get('metrics', {})
+            for k, v in metrics.items():
+                tree.insert("", "end", values=(name, k, v))
+        tree.pack(fill="both", expand=True, padx=10, pady=10)
+
+    def _create_checklist_tab(self, checklist: List[Dict[str, Any]]):
+        """Checklist tab'ı"""
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Checklist")
+        tree = ttk.Treeview(tab, columns=("Item", "Status", "Hint"), show="headings")
+        for col in ("Item", "Status", "Hint"):
+            tree.heading(col, text=col)
+            tree.column(col, width=180 if col != "Hint" else 280, anchor="w")
+        for it in checklist:
+            tree.insert("", "end", values=(it.get('item'), it.get('status'), it.get('hint')))
+        tree.pack(fill="both", expand=True, padx=10, pady=10)
+
+    def _create_root_cause_tab(self, findings: List[Dict[str, Any]]):
+        """Root-cause önerileri tab'ı"""
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Root-cause")
+        tree = ttk.Treeview(tab, columns=("Rule", "Severity", "Message", "Evidence"), show="headings")
+        for col, width in (("Rule", 120), ("Severity", 90), ("Message", 240), ("Evidence", 260)):
+            tree.heading(col, text=col)
+            tree.column(col, width=width, anchor="w")
+        for f in findings:
+            tree.insert("", "end", values=(f.get('rule'), f.get('severity'), f.get('message'), str(f.get('evidence'))))
+        tree.pack(fill="both", expand=True, padx=10, pady=10)
         
     def _create_history_tab(self):
         """Geçmiş tab'ı oluştur"""

@@ -744,7 +744,10 @@ class RealisticSimulator:
                 "vibration_history": component.vibration_history[-50:],
                 "health_history": component.health_history[-50:],
                 "efficiency_history": component.efficiency_history[-50:],
-                "trends": self._calculate_trends(component)
+                "trends": self._calculate_trends(component),
+                "subcomponents": self._generate_subcomponents(component_id, component),
+                "checklist": self._generate_checklist(component_id, component),
+                "root_cause": self._evaluate_rules(component_id, component)
             }
         return None
         
@@ -767,6 +770,180 @@ class RealisticSimulator:
             "health_change_rate": round(recent_health[-1] - recent_health[0], 2),
             "temperature_change_rate": round(recent_temp[-1] - recent_temp[0], 2)
         }
+
+    def _generate_subcomponents(self, component_id: str, component: ComponentHealth) -> List[Dict[str, Any]]:
+        """Alt-komponent metriklerini üret (simüle)."""
+        rnd = random.uniform
+        if component_id == "rectifier":
+            return [
+                {"name": "Diode Bridge", "metrics": {
+                    "forward_drop_avg[V]": round(0.65 + rnd(-0.05, 0.05), 3),
+                    "reverse_leakage[uA]": round(5 + rnd(-2, 4), 1),
+                    "thermal_hotspot[°C]": round(component.temperature + rnd(-1, 2), 1)
+                }}
+            ]
+        if component_id == "dc_link":
+            return [
+                {"name": "Capacitor Bank", "metrics": {
+                    "capacitance[mF]": round(2.2 + rnd(-0.2, 0.2), 2),
+                    "esr[mOhm]": round(35 + rnd(-10, 15), 1),
+                    "ripple[Vpp]": round(2.5 + rnd(-0.8, 0.8), 2)
+                }}
+            ]
+        if component_id == "inverter":
+            return [
+                {"name": "Gate Driver", "metrics": {
+                    "vge_high[V]": round(15.0 + rnd(-0.5, 0.5), 2),
+                    "vge_low[V]": round(-5.0 + rnd(-0.5, 0.5), 2),
+                    "dead_time[ns]": round(300 + rnd(-50, 80), 1)
+                }},
+                {"name": "Phase Current Balance", "metrics": {
+                    "imbalance[%]": round(rnd(0, 6), 2)
+                }}
+            ]
+        if component_id == "motor":
+            return [
+                {"name": "Bearing", "metrics": {
+                    "vibration_rms[mm/s]": round(component.vibration, 2),
+                    "bpfi_peak[dB]": round(20 + rnd(-5, 10), 1)
+                }},
+                {"name": "Insulation", "metrics": {
+                    "megger_500V[MΩ]": round(200 + rnd(-20, 30), 1)
+                }}
+            ]
+        if component_id == "fan":
+            return [
+                {"name": "Fan", "metrics": {
+                    "rpm": round(1800 + rnd(-150, 150), 0),
+                    "current[A]": round(0.4 + rnd(-0.1, 0.2), 2)
+                }}
+            ]
+        if component_id == "cu320":
+            return [
+                {"name": "24V PSU", "metrics": {
+                    "rail_24v[V]": round(24.0 + rnd(-0.4, 0.3), 2),
+                    "ripple[mVpp]": round(45 + rnd(-10, 20), 1)
+                }},
+                {"name": "PROFINET", "metrics": {
+                    "packet_loss[%]": round(rnd(0, 0.5), 3),
+                    "latency[ms]": round(1.2 + rnd(-0.3, 0.8), 2)
+                }}
+            ]
+        return []
+
+    def _generate_checklist(self, component_id: str, component: ComponentHealth) -> List[Dict[str, Any]]:
+        """Bileşen bazlı kısa teşhis kontrol listesi (simüle)."""
+        items: List[Dict[str, Any]] = []
+        def add(item, passed, hint):
+            items.append({"item": item, "status": "OK" if passed else "CHECK", "hint": hint})
+        # Ortak kriterler
+        add("Temperature within range", component.temperature < 70, f"temp={round(component.temperature,1)}°C < 70°C")
+        add("Vibration within range", component.vibration < 6.0, f"vib={round(component.vibration,2)} mm/s < 6.0")
+        add("Efficiency acceptable", component.efficiency > 85.0, f"eff={round(component.efficiency,1)}% > 85%")
+        # Özel kriterler
+        if component_id == "dc_link":
+            # Basit sezgisel: health düşükse ESR yüksek kabul et ve uyar
+            add("DC ripple acceptable", component.voltage < 760, f"Vdc={round(component.voltage,1)}V < 760V")
+        if component_id == "rectifier":
+            add("Input symmetry OK", component.current < 60.0, f"Iin~ {round(component.current,1)}A < 60A")
+        if component_id == "inverter":
+            add("Phase current balance OK", True, "imbalance < 6% (sim)")
+        if component_id == "motor":
+            add("Bearing vibration acceptable", component.vibration < 5.0, f"vib={round(component.vibration,2)} mm/s")
+        if component_id == "fan":
+            add("Fan current normal", component.current < 1.0, f"Ifan={round(component.current,2)}A < 1A")
+        if component_id == "cu320":
+            add("24V rail ripple OK", True, "<100 mVpp (sim)")
+            add("PN packet loss low", True, "<0.5% (sim)")
+        return items
+
+    # --- Simple Rule Engine with EWMA and Z-Score ---
+    def _ewma(self, values: List[float], alpha: float = 0.3) -> float:
+        if not values:
+            return 0.0
+        ewma_val = values[0]
+        for v in values[1:]:
+            ewma_val = alpha * v + (1 - alpha) * ewma_val
+        return ewma_val
+
+    def _zscore(self, values: List[float]) -> float:
+        if not values:
+            return 0.0
+        n = len(values)
+        mean = sum(values) / n
+        var = sum((v - mean) ** 2 for v in values) / max(1, (n - 1))
+        std = var ** 0.5
+        if std == 0:
+            return 0.0
+        return (values[-1] - mean) / std
+
+    def _evaluate_rules(self, component_id: str, component: ComponentHealth) -> List[Dict[str, Any]]:
+        """Basit kural motoru: eşik + trend (EWMA) + anomali (z-score)."""
+        findings: List[Dict[str, Any]] = []
+        def add(rule_id: str, severity: str, message: str, evidence: Dict[str, Any]):
+            findings.append({"rule": rule_id, "severity": severity, "message": message, "evidence": evidence})
+
+        # Hazır veriler
+        temp_vals = [t for _, t in component.temperature_history[-30:]]
+        vib_vals = [v for _, v in component.vibration_history[-30:]]
+        health_vals = [h for _, h in component.health_history[-30:]]
+
+        # EWMA ve Z-score
+        temp_ewma = self._ewma(temp_vals) if temp_vals else component.temperature
+        vib_ewma = self._ewma(vib_vals) if vib_vals else component.vibration
+        health_ewma = self._ewma(health_vals) if health_vals else component.health_score
+        temp_z = self._zscore(temp_vals)
+        vib_z = self._zscore(vib_vals)
+        health_z = self._zscore(health_vals)
+
+        # Genel kurallar
+        if temp_ewma > 70 or temp_z > 2.0:
+            add("TEMP_HIGH", "high", "Temperature trending high", {
+                "temp": round(component.temperature, 1), "ewma": round(temp_ewma, 1), "z": round(temp_z, 2)
+            })
+        if vib_ewma > 6.0 or vib_z > 2.0:
+            add("VIB_HIGH", "medium", "Vibration anomaly detected", {
+                "vibration": round(component.vibration, 2), "ewma": round(vib_ewma, 2), "z": round(vib_z, 2)
+            })
+        if health_ewma < 60 or health_z < -2.0:
+            add("HEALTH_DROP", "medium", "Health score decreasing", {
+                "health": round(component.health_score, 1), "ewma": round(health_ewma, 1), "z": round(health_z, 2)
+            })
+
+        # Bileşene özel (örnek) kurallar
+        if component_id == "dc_link":
+            # DC ripple proxy: efficiency düşüşü ve sıcaklık artışı birlikte
+            if component.efficiency < 85 and component.temperature > 60:
+                add("DCLINK_RIPPLE_SUSPECT", "high", "Possible DC-link ripple increase (cap aging)", {
+                    "eff": round(component.efficiency, 1), "temp": round(component.temperature, 1)
+                })
+        if component_id == "rectifier":
+            if component.current > 55 and component.temperature > 55:
+                add("RECTIFIER_STRESS", "high", "Rectifier stress (current & temperature)", {
+                    "I": round(component.current, 1), "temp": round(component.temperature, 1)
+                })
+        if component_id == "inverter":
+            if component.current > 50 and component.vibration > 4.0:
+                add("INVERTER_LOAD_VIB", "medium", "High load with elevated vibration", {
+                    "I": round(component.current, 1), "vib": round(component.vibration, 2)
+                })
+        if component_id == "motor":
+            if component.vibration > 5.0:
+                add("MOTOR_BEARING", "high", "Motor bearing vibration signature", {
+                    "vib": round(component.vibration, 2)
+                })
+        if component_id == "fan":
+            if component.health_score < 40:
+                add("FAN_DEGRADED", "medium", "Fan health degraded — check airflow and bearing", {
+                    "health": round(component.health_score, 1)
+                })
+        if component_id == "cu320":
+            if component.lubrication_level < 30 and component.efficiency < 80:
+                add("CONTROL_ENV", "low", "Control unit efficiency low; check PSU/thermal", {
+                    "eff": round(component.efficiency, 1)
+                })
+
+        return findings
         
     def perform_maintenance(self, component_id: str):
         """Bakım yap"""
@@ -809,7 +986,7 @@ class RealisticSimulator:
         }
         
     def get_component_details(self, component_id: str) -> Optional[Dict[str, Any]]:
-        """Bileşen detaylarını al"""
+        """Bileşen detaylarını al (zengin veri)."""
         if component_id in self.components:
             component = self.components[component_id]
             return {
@@ -818,6 +995,9 @@ class RealisticSimulator:
                 "vibration_history": component.vibration_history[-50:],
                 "health_history": component.health_history[-50:],
                 "efficiency_history": component.efficiency_history[-50:],
-                "trends": self._calculate_trends(component)
+                "trends": self._calculate_trends(component),
+                "subcomponents": self._generate_subcomponents(component_id, component),
+                "checklist": self._generate_checklist(component_id, component),
+                "root_cause": self._evaluate_rules(component_id, component)
             }
         return None

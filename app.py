@@ -736,12 +736,14 @@ Features:
                 try:
                     # Enhanced data'yı al
                     enhanced_data = None
+                    full_details = None
                     if hasattr(self.data_source, 'get_component_details'):
                         component_details = self.data_source.get_component_details(component_id)
                         if component_details and 'status' in component_details:
                             enhanced_data = component_details['status']
+                            full_details = component_details
                     
-                    ComponentDetailsWindow(self, clicked_component, list(history.history), enhanced_data)
+                    ComponentDetailsWindow(self, clicked_component, list(history.history), enhanced_data, full_details)
                     logger.log_user_action("component_click", f"Component: {clicked_component.get('name', 'Unknown')}")
                 except Exception as e:
                     logger.error(f"Error opening component details: {e}")
