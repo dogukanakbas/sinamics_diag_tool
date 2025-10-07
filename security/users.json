@@ -8,10 +8,10 @@
       "email": "admin@company.com",
       "is_active": true,
       "created_at": "2025-09-21T18:43:49.849851",
-      "last_login": "2025-10-07T22:11:01.451787",
+      "last_login": "2025-10-08T00:05:28.803614",
       "login_attempts": 0,
       "locked_until": null
     }
   ],
-  "last_updated": "2025-10-07T22:11:01.451898"
+  "last_updated": "2025-10-08T00:05:28.804201"
 }

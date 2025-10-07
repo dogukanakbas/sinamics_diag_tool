@@ -314,6 +314,7 @@ class App(tk.Tk):
                 self.bind("<KeyPress-x>", lambda e: self._stop_scenario())
                 self.bind("<KeyPress-p>", lambda e: self._show_simulator_control())
                 self.bind("<KeyPress-h>", lambda e: self._start_healthy_scenario())
+                self.bind("<KeyPress-d>", lambda e: self._start_dc_link_chain())
         else:
             # Diğer adaptörler için genel kısayollar
             self.bind("<F5>", lambda e: self._refresh_data())
@@ -377,7 +378,8 @@ Ctrl+R - Refresh Data"""
 S - Start Random Scenario (Advanced/Enhanced/Realistic Simulator)
 X - Stop Scenario (Advanced/Enhanced/Realistic Simulator)
 P - Show Simulator Control Panel (Advanced/Enhanced/Realistic Simulator)
-H - Start Healthy System Scenario (All Green)"""
+H - Start Healthy System Scenario (All Green)
+D - Start DC-Link Aging Chain Scenario"""
         
         from tkinter import messagebox
         messagebox.showinfo("Keyboard Shortcuts", shortcuts)
@@ -431,6 +433,24 @@ H - Start Healthy System Scenario (All Green)"""
                 else:
                     from tkinter import messagebox
                     messagebox.showerror("Error", "Failed to start healthy system scenario")
+            else:
+                from tkinter import messagebox
+                messagebox.showinfo("Info", "This simulator doesn't support scenarios")
+        else:
+            from tkinter import messagebox
+            messagebox.showinfo("Info", "Scenarios are only available with Advanced/Enhanced/Realistic Simulator")
+
+    def _start_dc_link_chain(self):
+        """DC-Link aging chain senaryosunu başlat"""
+        if isinstance(self.data_source, (AdvancedSimulator, EnhancedSimulator, RealisticSimulator)):
+            if hasattr(self.data_source, 'start_scenario'):
+                if self.data_source.start_scenario("dc_link_aging_chain"):
+                    logger.log_user_action("start_scenario", "DC-Link aging chain started")
+                    from tkinter import messagebox
+                    messagebox.showinfo("DC-Link Chain", "Zincirleme senaryo başladı:\n\n1) DC Link ripple artışı (A05030)\n2) Inverter overcurrent (F30012)\n3) Motor bearing (A05060)\n4) Fan failure (F30030)")
+                else:
+                    from tkinter import messagebox
+                    messagebox.showerror("Error", "Failed to start DC-Link chain scenario")
             else:
                 from tkinter import messagebox
                 messagebox.showinfo("Info", "This simulator doesn't support scenarios")

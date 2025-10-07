@@ -324,6 +324,10 @@ class RealisticSimulator:
         # Senaryo yönetimi
         self._current_scenario = None
         self._scenario_start_time = None
+
+        # Senaryo ile zorlanan fault/alarm'lar (otomatik temizleme dışı)
+        self._forced_faults: Dict[str, set] = {}
+        self._forced_alarms: Dict[str, set] = {}
         
         # Bileşenleri oluştur
         self._initialize_components()
@@ -449,6 +453,8 @@ class RealisticSimulator:
     def _check_faults_alarms(self):
         """Fault/Alarm kontrolü"""
         for component_id, component in self.components.items():
+            forced_faults = self._forced_faults.get(component_id, set())
+            forced_alarms = self._forced_alarms.get(component_id, set())
             # Fault kontrolü
             for fault_id, fault_info in self.fault_database.items():
                 if fault_info["component"] == component_id:
@@ -472,7 +478,7 @@ class RealisticSimulator:
                     # Fault'u ekle/çıkar
                     if should_trigger and fault_id not in component.faults:
                         component.faults.append(fault_id)
-                    elif not should_trigger and fault_id in component.faults:
+                    elif not should_trigger and fault_id in component.faults and fault_id not in forced_faults:
                         component.faults.remove(fault_id)
                         
             # Alarm kontrolü
@@ -496,7 +502,7 @@ class RealisticSimulator:
                     # Alarm'ı ekle/çıkar
                     if should_trigger and alarm_id not in component.alarms:
                         component.alarms.append(alarm_id)
-                    elif not should_trigger and alarm_id in component.alarms:
+                    elif not should_trigger and alarm_id in component.alarms and alarm_id not in forced_alarms:
                         component.alarms.remove(alarm_id)
                         
     def _process_scenario(self):
@@ -594,6 +600,16 @@ class RealisticSimulator:
             for component in self.components.values():
                 component.fatigue_level += 20.0
                 component.health_score -= 10.0
+        
+        elif event_type == "inject_fault" and component_id in self.components:
+            fault_id = event.get("fault_id")
+            if fault_id:
+                self.inject_fault(fault_id, component_id)
+        
+        elif event_type == "inject_alarm" and component_id in self.components:
+            alarm_id = event.get("alarm_id")
+            if alarm_id:
+                self.inject_alarm(alarm_id, component_id)
                 
     def start_scenario(self, scenario_name: str = None):
         """Senaryo başlat"""
@@ -611,6 +627,20 @@ class RealisticSimulator:
                     {"type": "make_healthy", "component": "dc_link", "time": 15},  # 15 saniye sonra DC Link
                     {"type": "make_healthy", "component": "inverter", "time": 20},  # 20 saniye sonra Inverter
                     {"type": "show_healthy_message", "time": 25},  # 25 saniye sonra mesaj
+                ]
+            },
+            "dc_link_aging_chain": {
+                "name": "DC-Link Aging Chain",
+                "description": "Cap aging → ripple↑ → inverter overcurrent → motor vibration → fan cooling issue",
+                "duration": 210,  # ~3.5 dakika
+                "events": [
+                    {"type": "load_increase", "component": "inverter", "load_percentage": 70, "time": 10},
+                    # DC link etkileri (simüle): sıcaklık/eff değişimi ile temsil
+                    {"type": "make_healthy", "component": "rectifier", "time": 20},  # referans stabil
+                    {"type": "inject_alarm", "component": "dc_link", "alarm_id": "A05030", "time": 40},
+                    {"type": "inject_fault", "component": "inverter", "fault_id": "F30012", "time": 80},
+                    {"type": "inject_alarm", "component": "motor", "alarm_id": "A05060", "time": 120},
+                    {"type": "inject_fault", "component": "fan", "fault_id": "F30030", "time": 160}
                 ]
             },
             "production_peak": {
@@ -957,6 +987,8 @@ class RealisticSimulator:
             if fault_id not in component.faults:
                 component.faults.append(fault_id)
                 print(f"Injected fault {fault_id} to {component_id}")
+            # Zorlanan fault olarak işaretle
+            self._forced_faults.setdefault(component_id, set()).add(fault_id)
                 
     def inject_alarm(self, alarm_id: str, component_id: str):
         """Manuel alarm enjeksiyonu"""
@@ -965,12 +997,16 @@ class RealisticSimulator:
             if alarm_id not in component.alarms:
                 component.alarms.append(alarm_id)
                 print(f"Injected alarm {alarm_id} to {component_id}")
+            # Zorlanan alarm olarak işaretle
+            self._forced_alarms.setdefault(component_id, set()).add(alarm_id)
                 
     def clear(self):
         """Tüm fault/alarm'ları temizle"""
         for component in self.components.values():
             component.faults.clear()
             component.alarms.clear()
+        self._forced_faults.clear()
+        self._forced_alarms.clear()
             
     def _force_ui_update(self):
         """UI'yi zorla güncelle"""

@@ -13409,3 +13409,17 @@
 2025-10-07 22:11:33 - sinamics_diag.diagnostics - INFO - Diagnostic data: {'type': 'fault', 'data': {'id': 'F30040', 'desc': 'Control unit fault', 'component': 'cu320', 'severity': 'high', 'timestamp': '2025-10-07T22:11:33.015915'}}
 2025-10-07 22:11:33 - sinamics_diag.diagnostics - INFO - Diagnostic data: {'type': 'fault', 'data': {'id': 'F30040', 'desc': 'Control unit fault', 'component': 'cu320', 'severity': 'high', 'timestamp': '2025-10-07T22:11:33.118462'}}
 2025-10-07 22:11:33 - sinamics_diag.diagnostics - INFO - Diagnostic data: {'type': 'fault', 'data': {'id': 'F30040', 'desc': 'Control unit fault', 'component': 'cu320', 'severity': 'high', 'timestamp': '2025-10-07T22:11:33.221245'}}
+2025-10-07 23:57:08 - sinamics_diag - INFO - Application started
+2025-10-07 23:57:08 - sinamics_diag - INFO - User action: app_start - Model: diag/models/sinamics_model.json, User: admin
+2025-10-07 23:57:09 - sinamics_diag - INFO - User action: start_scenario - DC-Link aging chain started
+2025-10-07 23:57:43 - sinamics_diag - INFO - User action: component_click - Component: Inverter
+2025-10-07 23:57:45 - sinamics_diag - INFO - User action: component_click - Component: DC Link
+2025-10-07 23:58:04 - sinamics_diag - INFO - User action: component_click - Component: Inverter
+2025-10-07 23:58:06 - sinamics_diag - INFO - User action: component_click - Component: Inverter
+2025-10-07 23:59:09 - sinamics_diag.diagnostics - INFO - Diagnostic data: {'type': 'alarm', 'data': {'id': 'A05030', 'desc': 'DC link voltage high', 'component': 'dc_link', 'severity': 'medium', 'timestamp': '2025-10-07T23:59:09.909484'}}
+2025-10-07 23:59:17 - sinamics_diag - INFO - User action: component_click - Component: DC Link
+2025-10-07 23:59:41 - sinamics_diag - INFO - User action: component_click - Component: Inverter
+2025-10-07 23:59:44 - sinamics_diag - INFO - User action: component_click - Component: DC Link
+2025-10-08 00:01:14 - sinamics_diag - INFO - User action: component_click - Component: Inverter
+2025-10-08 00:01:27 - sinamics_diag - INFO - User action: component_click - Component: Inverter
+2025-10-08 00:01:30 - sinamics_diag - INFO - User action: component_click - Component: DC Link
